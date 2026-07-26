@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pourfrodon Coaching — OTP Darius Top Lane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#131110;
+    --bg-alt:#1c1815;
+    --panel:#221c18;
+    --ink:#ECE3D2;
+    --muted:#9C9186;
+    --blood:#8E1F1F;
+    --blood-bright:#C4382F;
+    --steel:#4C4842;
+    --steel-light:#6b665e;
+    --diamond:#5FC9E8;
+    --gm:#D6495F;
+    --line: rgba(236,227,210,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .display{
+    font-family:'Staatliches', sans-serif;
+    letter-spacing:0.02em;
+    font-weight:400;
+    line-height:1.05;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+
+  /* texture */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.015) 0 2px, transparent 2px 60px);
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(19,17,16,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1080px; margin:0 auto;
+  }
+  .brand{
+    font-family:'Staatliches', sans-serif;
+    font-size:1.5rem; letter-spacing:0.08em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand .dot{width:8px;height:8px; background:var(--blood-bright); display:inline-block; transform:rotate(45deg);}
+  .navlinks{display:flex; gap:28px; font-size:0.85rem; letter-spacing:0.04em;}
+  .navlinks a{color:var(--muted); transition:color .2s;}
+  .navlinks a:hover{color:var(--ink);}
+  .nav-cta{
+    border:1px solid var(--blood-bright); color:var(--ink);
+    padding:8px 18px; font-size:0.82rem; letter-spacing:0.04em;
+    transition:background .2s;
+  }
+  .nav-cta:hover{background:var(--blood);}
+
+  /* HERO */
+  .hero{
+    position:relative;
+    padding:88px 0 60px;
+    background:
+      radial-gradient(ellipse at 75% 20%, rgba(142,31,31,0.25), transparent 55%),
+      linear-gradient(180deg, var(--bg) 0%, #100e0d 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-inner{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center;
+  }
+  .eyebrow{
+    font-size:0.75rem; letter-spacing:0.18em; color:var(--blood-bright);
+    text-transform:uppercase; margin-bottom:14px; font-weight:600;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 6vw, 4.4rem);
+    text-transform:uppercase;
+  }
+  .hero h1 span{color:var(--blood-bright);}
+  .hero p.lede{
+    margin-top:20px; color:var(--muted); font-size:1.05rem; max-width:46ch;
+  }
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 26px; font-size:0.9rem; letter-spacing:0.03em; font-weight:600;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--blood-bright); color:#161211;}
+  .btn-primary:hover{background:#DE5142;}
+  .btn-ghost{border:1px solid var(--steel-light); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* seal */
+  .seal-wrap{display:flex; justify-content:center;}
+  .seal{width:280px; height:280px;}
+  .seal-ring-outer{fill:none; stroke:var(--steel-light); stroke-width:1;}
+  .seal-ring-inner{fill:none; stroke:var(--blood-bright); stroke-width:1.4;}
+  .seal-text{fill:var(--muted); font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:2.5px;}
+  .seal-rotate{animation:spin 40s linear infinite; transform-origin:100px 100px;}
+  .seal-rank{font-family:'Staatliches', sans-serif; font-size:30px; fill:var(--ink); text-anchor:middle;}
+  .seal-sub{font-family:'JetBrains Mono', monospace; font-size:11px; fill:var(--gm); text-anchor:middle; letter-spacing:1px;}
+  .seal-sub2{font-family:'JetBrains Mono', monospace; font-size:9px; fill:var(--muted); text-anchor:middle; letter-spacing:1px;}
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .seal-rotate{animation:none;} }
+
+  /* gash divider */
+  .gash{
+    height:26px; background:var(--blood);
+    clip-path:polygon(0 40%, 8% 60%, 16% 30%, 24% 70%, 32% 20%, 40% 55%, 48% 35%, 56% 65%, 64% 25%, 72% 60%, 80% 30%, 88% 70%, 96% 35%, 100% 50%, 100% 100%, 0 100%);
+  }
+
+  /* STATS SECTION */
+  section{padding:80px 0; position:relative; z-index:2;}
+  .section-head{margin-bottom:48px;}
+  .section-head .eyebrow{color:var(--gm);}
+  .section-head h2{font-size:clamp(2rem,4vw,2.8rem); text-transform:uppercase;}
+
+  .stat-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .stat-card{background:var(--bg-alt); padding:28px 22px;}
+  .stat-card .label{font-size:0.72rem; letter-spacing:0.08em; color:var(--muted); text-transform:uppercase;}
+  .stat-card .value{font-family:'JetBrains Mono',monospace; font-size:1.7rem; margin-top:10px; font-weight:600;}
+  .stat-card .value.blood{color:var(--blood-bright);}
+  .stat-card .value.gm{color:var(--gm);}
+  .stat-card .value.diamond{color:var(--diamond);}
+  .stat-card .sub{font-size:0.78rem; color:var(--muted); margin-top:6px;}
+
+  .climb{margin-top:56px; display:grid; grid-template-columns:140px 1fr; gap:32px; align-items:center;}
+  .climb-label{font-size:0.75rem; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase;}
+  .ladder{display:flex; align-items:flex-end; gap:6px; height:120px;}
+  .rung{flex:1; background:var(--steel); position:relative; transition:background .2s;}
+  .rung.active{background:linear-gradient(180deg, var(--blood-bright), var(--blood));}
+  .rung .tag{position:absolute; top:-22px; left:50%; transform:translateX(-50%); font-size:0.65rem; font-family:'JetBrains Mono',monospace; color:var(--muted); white-space:nowrap;}
+
+  /* OFFER */
+  .offer-panel{
+    background:var(--panel); border:1px solid var(--line);
+    display:grid; grid-template-columns:1fr 1.4fr;
+  }
+  .offer-price{
+    padding:44px; border-right:1px solid var(--line);
+    display:flex; flex-direction:column; justify-content:center;
+    background:
+      linear-gradient(160deg, rgba(142,31,31,0.18), transparent 60%);
+  }
+  .price-tag .amount{font-family:'Staatliches',sans-serif; font-size:5rem; color:var(--blood-bright); line-height:1;}
+  .price-tag .amount sup{font-size:1.8rem; top:-2em;}
+  .price-tag .duration{font-family:'JetBrains Mono',monospace; color:var(--muted); margin-top:8px; font-size:0.95rem;}
+  .offer-details{padding:44px;}
+  .offer-details ul{list-style:none;}
+  .offer-details li{
+    display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line);
+    font-size:0.95rem;
+  }
+  .offer-details li:last-child{border-bottom:none;}
+  .offer-details li .mark{color:var(--blood-bright); font-weight:700; font-family:'JetBrains Mono',monospace;}
+  .custom-note{margin-top:24px; padding-top:20px; border-top:1px dashed var(--steel-light); color:var(--muted); font-size:0.88rem;}
+
+  /* PROCESS */
+  .process{display:grid; grid-template-columns:repeat(5,1fr); gap:0; counter-reset:step;}
+  .step{
+    border-left:1px solid var(--line); padding:0 22px 0 22px; position:relative;
+  }
+  .step:first-child{border-left:none;}
+  .step .num{
+    font-family:'Staatliches',sans-serif; font-size:2.6rem; color:var(--steel-light); display:block;
+  }
+  .step h3{font-size:1rem; text-transform:uppercase; margin:14px 0 10px; letter-spacing:0.03em;}
+  .step p{font-size:0.86rem; color:var(--muted);}
+
+  /* PROOF GALLERY */
+  .proof-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  }
+  .proof-card{
+    background:var(--panel); border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .proof-card img{
+    width:100%; display:block; border-bottom:1px solid var(--line);
+  }
+  .proof-card figcaption{
+    padding:14px 16px; font-size:0.78rem; color:var(--muted); letter-spacing:0.02em;
+  }
+  @media(max-width:860px){
+    .proof-grid{grid-template-columns:1fr;}
+  }
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    padding:22px 0; display:flex; justify-content:space-between; align-items:center;
+    cursor:pointer; font-size:1.02rem; font-weight:600;
+  }
+  .faq-q .plus{font-family:'JetBrains Mono',monospace; color:var(--blood-bright); transition:transform .2s;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .28s ease; color:var(--muted); font-size:0.92rem;}
+  .faq-item.open .faq-a{max-height:200px; padding-bottom:22px;}
+
+  /* CTA FOOTER */
+  .cta-final{
+    text-align:center; padding:100px 0; background:var(--bg-alt); border-top:1px solid var(--line);
+  }
+  .cta-final h2{font-size:clamp(2.2rem,5vw,3.4rem); text-transform:uppercase; margin-bottom:18px;}
+  .cta-final p{color:var(--muted); max-width:50ch; margin:0 auto 32px;}
+
+  footer{
+    padding:32px; text-align:center; color:var(--muted); font-size:0.8rem;
+    border-top:1px solid var(--line);
+  }
+
+  @media(max-width:860px){
+    .hero-inner{grid-template-columns:1fr;}
+    .seal-wrap{order:-1;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .offer-panel{grid-template-columns:1fr;}
+    .offer-price{border-right:none; border-bottom:1px solid var(--line);}
+    .process{grid-template-columns:1fr 1fr; row-gap:32px;}
+    .step{border-left:none; padding-left:0;}
+    .navlinks{display:none;}
+    .climb{grid-template-columns:1fr; gap:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="dot"></span>POURFRODON</div>
+    <div class="navlinks">
+      <a href="#stats">Le joueur</a>
+      <a href="#offre">Offre</a>
+      <a href="#process">Déroulement</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#offre" class="nav-cta">Réserver</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Coaching Top Lane · OTP Darius</div>
+      <h1>Grind ta<br>lane <span>solo</span>.</h1>
+      <p class="lede">Coaching individuel par un top laner installé en Corée du Sud, challenger EUW, peak 1485 LP. Focus wave management, matchups bruiser et macro mid/late — pas de blabla, que du concret.</p>
+      <div class="hero-ctas">
+        <a href="#offre" class="btn btn-primary">Voir l'offre — 15€ / 1h10</a>
+        <a href="#" class="btn btn-ghost">Discord</a>
+      </div>
+    </div>
+    <div class="seal-wrap">
+      <svg class="seal" viewBox="0 0 200 200">
+        <defs>
+          <path id="circlePath" d="M 100,100 m -82,0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0"/>
+        </defs>
+        <circle cx="100" cy="100" r="95" class="seal-ring-outer"/>
+        <circle cx="100" cy="100" r="70" class="seal-ring-inner"/>
+        <g class="seal-rotate">
+          <text class="seal-text">
+            <textPath href="#circlePath" startOffset="0%">TOP LANE • OTP DARIUS • EUW • KOREA •</textPath>
+          </text>
+        </g>
+        <text x="100" y="92" class="seal-rank">CHALL</text>
+        <text x="100" y="112" class="seal-sub">1009 LP · 60% WR</text>
+        <text x="100" y="128" class="seal-sub2">PEAK 1485 LP</text>
+      </svg>
+    </div>
+  </div>
+</section>
+<div class="gash"></div>
+
+<section id="stats">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Le joueur</div>
+      <h2>Les stats, pas les promesses</h2>
+    </div>
+
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="stat-card">
+        <div class="label">Rang actuel · EUW</div>
+        <div class="value blood">Challenger</div>
+        <div class="sub">1009 LP · 60% WR</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Peak all-time</div>
+        <div class="value blood">Challenger</div>
+        <div class="sub">1485 LP</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Rôle</div>
+        <div class="value">Top</div>
+        <div class="sub">Basé en Corée du Sud</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof wrap">
+  <div class="section-head">
+    <div class="eyebrow">La preuve</div>
+    <h2 style="text-transform:uppercase; font-size:2.2rem;">Pas des mots, des screens</h2>
+  </div>
+  <div class="proof-grid">
+    <figure class="proof-card">
+      <img src="img/rank-card.png" alt="Rang actuel Grandmaster / Peak Challenger">
+      <figcaption>Current rank &amp; peak — lolpros.gg</figcaption>
+    </figure>
+    <figure class="proof-card">
+      <img src="img/opgg-challenger.png" alt="Challenger 1009 LP, 60% winrate, op.gg">
+      <figcaption>Challenger · 1009 LP · 60% WR — op.gg</figcaption>
+    </figure>
+    <figure class="proof-card">
+      <img src="img/smurf-run.png" alt="Run smurf 31 victoires 0 défaite">
+      <figcaption>Run smurf terminé 31V-0D — op.gg</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="gash" style="background:var(--steel);"></div>
+
+<section id="offre">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">L'offre</div>
+      <h2>Une session, zéro superflu</h2>
+    </div>
+    <div class="offer-panel">
+      <div class="offer-price">
+        <div class="price-tag">
+          <div class="amount">15<sup>€</sup></div>
+          <div class="duration mono">/ session · 1h10</div>
+        </div>
+      </div>
+      <div class="offer-details">
+        <ul>
+          <li><span class="mark">→</span> Review de 2 games récentes (ranked)</li>
+          <li><span class="mark">→</span> Wave management : freeze, slow push, reset</li>
+          <li><span class="mark">→</span> Conseils personnalisés selon ton champion pool</li>
+          <li><span class="mark">→</span> Macro early/mid game et priorité de lane</li>
+          <li><span class="mark">→</span> Débrief écrit des points à retravailler</li>
+        </ul>
+        <div class="custom-note">Team, duo bot, ou format long terme sur plusieurs sessions ? Envoie-moi un message sur Discord, on adapte le format à ton besoin.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Déroulement</div>
+      <h2>Comment ça se passe</h2>
+    </div>
+    <div class="process">
+      <div class="step"><span class="num">01</span><h3>Prise de contact</h3><p>Petit vocal Discord pour cerner ton niveau et ton besoin réel.</p></div>
+      <div class="step"><span class="num">02</span><h3>Envoi des games</h3><p>Tu m'envoies 2 replays ranked récents en amont de la session.</p></div>
+      <div class="step"><span class="num">03</span><h3>Review live</h3><p>On regarde ensemble, je pointe les erreurs et pourquoi.</p></div>
+      <div class="step"><span class="num">04</span><h3>Correctifs concrets</h3><p>Wave management, trades, macro — adapté à ton pool.</p></div>
+      <div class="step"><span class="num">05</span><h3>Débrief</h3><p>Notes écrites à garder pour tes prochaines games.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="gash"></div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">FAQ</div>
+      <h2>Questions fréquentes</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">À partir de quel elo puis-je être coaché ?<span class="plus">+</span></div>
+        <div class="faq-a">N'importe quel elo, du fer au diamant/master. Le contenu s'adapte à ton niveau réel, pas à un programme générique.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Je ne joue pas Darius, ça marche quand même ?<span class="plus">+</span></div>
+        <div class="faq-a">Oui. Les fondamentaux (wave management, trades, macro top lane) s'appliquent à la majorité des champions top, bruiser ou non.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Coaching duo ou team possible ?<span class="plus">+</span></div>
+        <div class="faq-a">Oui, sur demande — format et tarif adaptés selon le nombre de joueurs.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Comment se déroule une review de game ?<span class="plus">+</span></div>
+        <div class="faq-a">Je regarde ton replay avec toi sur Discord, je relève les erreurs et t'explique le "pourquoi" derrière chaque correctif.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="wrap">
+    <h2>Prêt à monter d'elo ?</h2>
+    <p>Une session, un débrief clair, et un plan pour ta prochaine game.</p>
+    <a href="#" class="btn btn-primary">Contacter sur Discord</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Pourfrodon Coaching — Ce site n'est ni approuvé ni sponsorisé par Riot Games.
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+</script>
+
+</body>
+</html>
